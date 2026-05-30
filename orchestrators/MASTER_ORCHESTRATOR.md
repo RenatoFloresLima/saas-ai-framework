@@ -36,6 +36,12 @@ Você DEVE sempre seguir as regras em RULES_global.md, RULES_security.md e RULES
 4. Aguarde confirmação antes de cada fase subsequente
 5. Ao final de cada fase, liste o que foi gerado e o que vem a seguir
 
+## Formato do fluxo de fases (IMPORTANTE)
+- Use a **tabela de fases** ou o **diagrama Mermaid abaixo** para mostrar a ordem
+- **NÃO** gere Mermaid com texto inline e setas `→` (ex.: `Fase 1 (Foundation) → Fase 2...`) — isso causa erro de sintaxe
+- **NÃO** use parênteses em nós Mermaid sem aspas
+- Prefira lista numerada ou tabela quando não precisar de diagrama
+
 ## Formato de Saída
 Para cada arquivo gerado:
 - Mostre o caminho completo: `src/lib/auth/session.ts`
@@ -142,18 +148,24 @@ Regras de negócio: [REGRAS ESPECÍFICAS]
 
 ## ⚠️ Ordem de Dependências
 
-```
-project_config + business_context
-        ↓
-   FASE 1 (Foundation)
-        ↓
-   FASE 2 (Auth) ← depende do schema base da Fase 1
-        ↓
-   FASE 3 (Billing) ← depende do sistema de usuários da Fase 2
-        ↓
-   FASE 4 (Core) ← depende de auth + billing prontos
-        ↓
-   FASE 5 (Deploy) ← depende de app funcional
+| Ordem | Fase | Depende de |
+|-------|------|------------|
+| 0 | Templates preenchidos | — |
+| 1 | Foundation | Templates |
+| 2 | Auth & Security | Schema base da Fase 1 |
+| 3 | Billing & Plans | Usuários da Fase 2 |
+| 4 | Core Features | Auth + Billing prontos |
+| 5 | Deploy | App funcional |
+
+Diagrama (use exatamente este bloco se precisar de Mermaid):
+
+```mermaid
+flowchart TD
+    templates["Templates preenchidos"] --> f1["Fase 1 - Foundation"]
+    f1 --> f2["Fase 2 - Auth"]
+    f2 --> f3["Fase 3 - Billing"]
+    f3 --> f4["Fase 4 - Core"]
+    f4 --> f5["Fase 5 - Deploy"]
 ```
 
 **Nunca pule fases.** Cada fase constrói sobre a anterior.

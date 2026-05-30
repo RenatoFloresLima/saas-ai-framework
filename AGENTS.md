@@ -46,18 +46,21 @@ Conteúdo detalhado de cada agent: pasta `agents/`, `orchestrators/` e `subagent
 
 ## Fluxo por fases
 
-```
-project_config + business_context
-        ↓
-   Fase 1 — phase-1-foundation
-        ↓
-   Fase 2 — phase-2-auth-security
-        ↓
-   Fase 3 — phase-3-billing
-        ↓
-   Fase 4 — core features (orchestrators/PHASE_4_*.md)
-        ↓
-   Fase 5 — deploy (orchestrators/PHASE_5_*.md)
+| Ordem | Fase | Skill |
+|-------|------|-------|
+| 1 | Foundation | `phase-1-foundation` |
+| 2 | Auth & Security | `phase-2-auth-security` |
+| 3 | Billing | `phase-3-billing` |
+| 4 | Core Features | ver `orchestrators/PHASE_4_*.md` |
+| 5 | Deploy | ver `orchestrators/PHASE_5_*.md` |
+
+```mermaid
+flowchart TD
+    templates["Templates preenchidos"] --> f1["Fase 1 - Foundation"]
+    f1 --> f2["Fase 2 - Auth"]
+    f2 --> f3["Fase 3 - Billing"]
+    f3 --> f4["Fase 4 - Core"]
+    f4 --> f5["Fase 5 - Deploy"]
 ```
 
 **Nunca pule fases.** Cada fase depende da anterior.

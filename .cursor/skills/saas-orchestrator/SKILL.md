@@ -23,6 +23,17 @@ Se não estiverem preenchidos, peça ao usuário para completá-los ou use a ski
 5. Aguarde confirmação do usuário antes de cada fase subsequente.
 6. Ao final de cada fase, liste o que foi gerado e o que vem a seguir.
 
+## Formato do fluxo de fases
+
+Ao mostrar a ordem das fases, use **tabela** ou **lista numerada**.
+
+**Nunca** gere Mermaid inválido como:
+```
+Fase 1 (Foundation) → Fase 2 (Auth) → Fase 3 (Billing) ...
+```
+
+Isso causa `Mermaid Syntax Error`. Se precisar de diagrama, copie o bloco validado em `orchestrators/MASTER_ORCHESTRATOR.md`.
+
 ## Fases
 
 | Fase | Skill | Orquestrador |
