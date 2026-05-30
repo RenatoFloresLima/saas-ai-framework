@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+*.swp
+*.swo
+.vscode/
+
+# Env (nunca commitar secrets)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Node (projetos gerados pelo framework)
+node_modules/
+.next/
+dist/
+build/
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal

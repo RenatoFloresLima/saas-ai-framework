@@ -1,0 +1,164 @@
+# 📋 RULES_GLOBAL — Regras Universais
+
+> Estas regras se aplicam a TODA geração de código neste framework.
+> Nenhum agent ou subagent pode violá-las.
+
+---
+
+## 1. TypeScript
+
+```
+✅ TypeScript estrito (strict: true no tsconfig)
+✅ Sem `any` explícito — usar `unknown` e fazer type narrowing
+✅ Tipos explícitos em parâmetros e retornos de funções públicas
+✅ Usar `as const` para objetos de configuração imutáveis
+✅ Prefer interfaces para objetos, types para unions/intersections
+❌ Nunca usar @ts-ignore sem comentário explicando o motivo
+❌ Nunca usar `!` (non-null assertion) sem checar antes
+```
+
+## 2. Nomenclatura
+
+```
+Arquivos:           kebab-case         (user-profile.ts)
+Componentes React:  PascalCase         (UserProfile.tsx)
+Funções:            camelCase          (getUserProfile)
+Constantes:         SCREAMING_SNAKE    (MAX_RETRY_COUNT)
+Enums:              PascalCase         (UserRole)
+Valores de Enum:    SCREAMING_SNAKE    (UserRole.SUPER_ADMIN)
+Interfaces:         PascalCase com I   (IUserService) ou sem (UserService)
+Types:              PascalCase         (UserProfile)
+Hooks:              use + camelCase    (useCurrentUser)
+Server actions:     verbo + entidade   (createUser, deleteProduct)
+```
+
+## 3. Estrutura de Arquivos
+
+```
+src/
+├── app/              ← Next.js App Router (rotas, layouts, pages)
+│   ├── (auth)/       ← grupo de rotas auth (sem layout de dashboard)
+│   ├── (dashboard)/  ← grupo de rotas protegidas
+│   └── api/          ← API Routes
+├── actions/          ← Server Actions (por domínio)
+│   ├── auth/
+│   ├── billing/
+│   └── [domínio]/
+├── components/       ← Componentes reutilizáveis
+│   ├── ui/           ← shadcn/ui components (não editar diretamente)
+│   ├── auth/         ← componentes de auth
+│   └── [domínio]/    ← componentes por domínio
+├── hooks/            ← React hooks customizados
+├── lib/              ← Utilitários, clientes, configurações
+│   ├── auth/
+│   ├── billing/
+│   └── security/
+├── types/            ← Tipos TypeScript globais
+└── emails/           ← React Email templates
+```
+
+## 4. Error Handling
+
+```typescript
+// ✅ Pattern padrão para Server Actions
+type ActionResult<T = void> = 
+  | { success: true; data: T }
+  | { success: false; error: string; code?: ErrorCode }
+
+// ✅ Sempre capturar erros e retornar estruturado
+try {
+  const result = await db.user.create({ data })
+  return { success: true, data: result }
+} catch (error) {
+  console.error("[CREATE_USER]", error)
+  return { success: false, error: "Erro ao criar usuário" }
+}
+
+// ❌ Nunca deixar erro não tratado
+// ❌ Nunca expor stack trace ao cliente
+// ❌ Nunca retornar mensagens de erro do banco (pode expor schema)
+```
+
+## 5. Validação
+
+```typescript
+// ✅ Zod em TODO input do usuário (forms, API params, query strings)
+// ✅ Validar no servidor MESMO SE validou no cliente
+// ✅ Schemas Zod exportados para reutilização
+// ✅ Mensagens de erro em português (usuário final)
+import { z } from "zod"
+
+export const CreateUserSchema = z.object({
+  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres").max(100),
+  email: z.string().email("Email inválido"),
+  password: z.string().min(8, "Senha deve ter pelo menos 8 caracteres"),
+})
+```
+
+## 6. Database (Prisma)
+
+```typescript
+// ✅ Singleton do Prisma Client
+// ✅ Sempre incluir relações explicitamente (sem N+1)
+// ✅ Usar transactions para operações multi-tabela
+// ✅ Sempre filtrar deletedAt: null em queries normais
+// ✅ Campos obrigatórios em todos os modelos:
+//    id, createdAt, updatedAt
+// ✅ Soft delete com deletedAt: DateTime?
+// ❌ Nunca usar $queryRaw sem parâmetros sanitizados
+```
+
+## 7. Componentes React
+
+```typescript
+// ✅ Server Components por padrão (sem 'use client' desnecessário)
+// ✅ 'use client' apenas quando necessário (eventos, hooks, browser APIs)
+// ✅ Props tipadas com interface/type
+// ✅ Valores padrão explícitos
+// ✅ Componentes pequenos e focados (< 150 linhas idealmente)
+// ✅ Extrair lógica complexa para hooks
+
+// Estrutura de arquivo de componente:
+// 1. Imports
+// 2. Types/Interfaces
+// 3. Constantes do componente
+// 4. Componente principal
+// 5. Sub-componentes (se pequenos)
+// 6. Export default
+```
+
+## 8. Performance
+
+```
+✅ Usar React.Suspense para loading states
+✅ Loading.tsx em todas as rotas relevantes
+✅ Error.tsx em todas as rotas
+✅ Imagens com next/image
+✅ Fontes com next/font
+✅ Dados estáticos com cache
+✅ Consultas pesadas paginadas (default: 20 itens)
+❌ Nunca fetch em loops
+❌ Nunca query sem índice em tabelas grandes
+```
+
+## 9. Acessibilidade
+
+```
+✅ Todos os inputs têm labels associados
+✅ Botões têm aria-label descritivo quando sem texto visível
+✅ Imagens têm alt text
+✅ Cores não são o único meio de transmitir informação
+✅ Formulários têm feedback de erro acessível (aria-describedby)
+```
+
+## 10. Comentários e Documentação
+
+```typescript
+// ✅ Comentar "por quê", não "o quê"
+// ✅ JSDoc em funções públicas de libs/utils
+// ✅ Marcar código temporário com TODO: + descrição
+// ✅ Marcar decisões técnicas importantes com NOTE:
+// ✅ Marcar pontos de personalização com [BUSINESS LOGIC]:
+// ❌ Não comentar código óbvio
+// ❌ Não deixar código comentado — usar git
+```
