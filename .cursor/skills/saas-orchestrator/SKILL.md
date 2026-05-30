@@ -24,9 +24,10 @@ Este repositório é **somente o orquestrador** (prompts, rules, referências). 
 2. As regras em `.cursor/rules/` já estão ativas — nunca viole `global.mdc` ou `security.mdc`.
 3. Execute as fases **em ordem** (1 → 5). Nunca pule fases.
 4. Na Fase 2, siga `references/auth/PATTERNS.md` para o SaaS default (senha visível, OAuth, logout).
-5. Ao iniciar, confirme entendimento com 5 bullets e peça aprovação das decisões técnicas.
-6. Aguarde confirmação do usuário antes de cada fase subsequente.
-7. Ao final de cada fase, liste o que foi gerado e o que vem a seguir.
+5. Na Fase 5, use `deploy_target` do `project_config.md` (Vercel ou VPS) — `references/deploy/PATTERNS.md`.
+6. Ao iniciar, confirme entendimento com 5 bullets e peça aprovação das decisões técnicas.
+7. Aguarde confirmação do usuário antes de cada fase subsequente.
+8. Ao final de cada fase, liste o que foi gerado e o que vem a seguir.
 
 ## Formato do fluxo de fases
 
@@ -47,7 +48,7 @@ Isso causa `Mermaid Syntax Error`. Se precisar de diagrama, copie o bloco valida
 | 2 — Auth & Security | `phase-2-auth-security` | `orchestrators/PHASE_2_auth_security.md` |
 | 3 — Billing | `phase-3-billing` | `orchestrators/PHASE_3_billing.md` |
 | 4 — Core Features | — | `orchestrators/PHASE_4_core_features.md` (quando existir) |
-| 5 — Deploy | — | `orchestrators/PHASE_5_deploy.md` (quando existir) |
+| 5 — Deploy | `phase-5-deploy` | `orchestrators/PHASE_5_deploy.md` |
 
 ## Formato de saída
 

@@ -17,6 +17,8 @@ Instale o framework no projeto SaaS com:
 
 O script copia `references/`, `.cursor/`, agents, orchestrators e templates. **Não** aponte o script para a pasta do próprio `saas-ai-framework`.
 
+**Deploy (Fase 5):** em `project_config.md` defina `deploy_target: Vercel` ou `VPS` e preencha o bloco `vercel:` ou `vps:` + `production_url`.
+
 ---
 
 ## TL;DR — Versão Ultra Rápida

@@ -19,7 +19,7 @@ Uso:
 
 O que é copiado/sincronizado:
   .cursor/rules, .cursor/skills  (sempre atualiza)
-  references/                    (padrões SaaS default — auth, etc.)
+  references/                    (auth/, deploy/ — Vercel ou VPS)
   agents/, orchestrators/, subagents/, rules/, skills/, templates/
   docs/                          (guia de uso)
   AGENTS.md
@@ -134,6 +134,6 @@ echo "  1. Abra no Cursor: $TARGET"
 echo "  2. Preencha templates/project_config.md (inclua o caminho deste projeto)"
 echo "  3. Preencha templates/business_context.md"
 echo "  4. No chat: Use a skill saas-orchestrator"
-echo "  5. Na Fase 2, use references/auth/ como base do auth (ver references/auth/PATTERNS.md)"
+echo "  5. Na Fase 2: references/auth/ | Na Fase 5: deploy_target em project_config (Vercel ou VPS)"
 echo ""
 echo "Para atualizar rules/skills/referências depois, rode este script novamente no mesmo destino."

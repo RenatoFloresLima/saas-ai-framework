@@ -124,16 +124,17 @@ Comece agora com o passo 1.
 
 ### FASE 5 — Deploy & Observability
 **Orquestrador:** `PHASE_5_deploy.md`
+**Referência:** `references/deploy/PATTERNS.md`
 **Agent Principal:** `DEVOPS_AGENT.md`
+**Decisão:** `deploy_target` em `project_config.md` → **Vercel** ou **VPS**
 **O que gera:**
-- Configuração Vercel/Railway
-- GitHub Actions CI/CD
-- Configuração de logs (estruturado)
-- Health check endpoint
-- Documentação de deploy
+- GitHub Actions CI/CD (sempre)
+- Logs estruturados, validação de env, `/api/health`
+- **Vercel:** `vercel.json`, `docs/DEPLOY_VERCEL.md`
+- **VPS:** `docs/DEPLOY_VPS.md`, Caddy/Nginx, systemd/PM2/Docker, `standalone`, script de deploy
 - Checklist de produção
 
-**Critério de conclusão:** App deployado e acessível publicamente.
+**Critério de conclusão:** App acessível em `production_url` (configurado pelo dev na plataforma escolhida).
 
 ---
 

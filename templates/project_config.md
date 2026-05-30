@@ -61,9 +61,31 @@ email_templates: React Email
 # Storage (uploads de arquivos)
 storage_provider: Cloudflare R2                # ou: AWS S3, Supabase Storage, UploadThing
 
-# Deploy
-deploy_target: Vercel                          # ou: Railway, Fly.io, Render
+# Deploy — escolha UM destino (Fase 5 lê isto; não repita no chat)
+deploy_target: Vercel                          # Vercel | VPS
+
+# URL pública HTTPS de produção (NEXTAUTH_URL, Stripe webhooks, OAuth)
+production_url: https://app.seudominio.com.br  # [CONFIGURAR]
+
 ci_cd: GitHub Actions
+
+# --- Somente se deploy_target: Vercel ---
+vercel:
+  region: gru1                                 # gru1 = São Paulo; iad1, etc.
+  project_name: ""                             # opcional — Vercel sugere se vazio
+  team_slug: ""                                # opcional — slug do time Vercel
+
+# --- Somente se deploy_target: VPS ---
+vps:
+  host: ""                                     # IP ou hostname [CONFIGURAR]
+  ssh_user: deploy
+  ssh_port: 22
+  deploy_path: /var/www/meu-saas               # pasta da aplicação no servidor
+  app_port: 3000                               # porta interna do Node (atrás do proxy)
+  reverse_proxy: Caddy                         # Caddy | Nginx
+  process_manager: systemd                     # systemd | PM2 | Docker
+  node_version: "20"
+  postgres_on_vps: false                       # true = Postgres no mesmo VPS; false = Neon/remoto
 
 # Cache/Sessões (opcional)
 cache: Redis via Upstash                       # ou: sem cache, Vercel KV
@@ -187,8 +209,11 @@ sidebar_position: left             # left | right (se sidebar)
 DATABASE_URL=                      # URL do PostgreSQL
 
 # Auth
-NEXTAUTH_SECRET=                   # openssl rand -base64 32
-NEXTAUTH_URL=                      # http://localhost:3000
+AUTH_SECRET=                       # openssl rand -base64 32 (produção: obrigatório)
+NEXTAUTH_SECRET=                   # mesmo valor que AUTH_SECRET se usar ambos
+NEXTAUTH_URL=                      # dev: http://localhost:3000 | prod: = production_url
+AUTH_URL=                          # dev: http://localhost:3000 | prod: = production_url
+NEXT_PUBLIC_APP_URL=               # dev: http://localhost:3000 | prod: = production_url
 
 # OAuth (preencha quando tiver; vazio = Fase 2 segue sem botão Google)
 GOOGLE_CLIENT_ID=

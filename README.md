@@ -17,7 +17,7 @@ A ideia: **gerar tudo que é padrão → você desenvolve só o diferencial do n
 | `subagents/` | Tarefas pontuais (CRUD, RBAC, …) |
 | `rules/` | Fonte das regras (TypeScript, segurança, API, banco) |
 | `templates/` | Config do projeto e contexto de negócio |
-| `references/` | Código de referência para o SaaS default (auth, etc.) — copiar no projeto gerado |
+| `references/` | Referências canônicas (`auth/`, `deploy/` Vercel ou VPS) — copiar no projeto gerado |
 
 ---
 

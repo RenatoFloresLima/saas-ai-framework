@@ -41,6 +41,7 @@ Invoque pelo nome no chat ou pelo seletor de skills:
 | `database-agent` | Schema, migrations, queries |
 | `billing-agent` | Assinaturas e webhooks |
 | `frontend-agent` | UI com shadcn/ui |
+| `phase-5-deploy` | Deploy Vercel ou VPS (Fase 5) |
 | `crud-generator` | CRUD completo para uma entidade |
 | `stripe` | Padrões Stripe SDK |
 
@@ -54,7 +55,7 @@ Conteúdo detalhado de cada agent: pasta `agents/`, `orchestrators/` e `subagent
 | 2 | Auth & Security | `phase-2-auth-security` |
 | 3 | Billing | `phase-3-billing` |
 | 4 | Core Features | ver `orchestrators/PHASE_4_*.md` |
-| 5 | Deploy | ver `orchestrators/PHASE_5_*.md` |
+| 5 | Deploy | `phase-5-deploy` → `orchestrators/PHASE_5_deploy.md` |
 
 ```mermaid
 flowchart TD
@@ -94,7 +95,7 @@ saas-ai-framework/
 ├── rules/                ← Fonte das rules (espelhada em .cursor/rules/)
 ├── skills/               ← Fonte das skills de stack (espelhada em .cursor/skills/)
 ├── templates/            ← Config do projeto e contexto de negócio
-├── references/           ← Implementações canônicas (ex.: auth SaaS default)
+├── references/           ← Canônicos: auth/, deploy/ (Vercel ou VPS)
 └── docs/                 ← Documentação de uso
 ```
 

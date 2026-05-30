@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": ["gru1"],
+  "buildCommand": "prisma generate && next build",
+  "installCommand": "npm ci"
+}

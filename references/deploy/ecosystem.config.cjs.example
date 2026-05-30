@@ -1,0 +1,16 @@
+/** PM2 — copiar para ecosystem.config.cjs na raiz do projeto SaaS */
+module.exports = {
+  apps: [
+    {
+      name: "saas-app",
+      cwd: "./",
+      script: ".next/standalone/server.js",
+      instances: 1,
+      exec_mode: "fork",
+      env: {
+        NODE_ENV: "production",
+        PORT: 3000,
+      },
+    },
+  ],
+}

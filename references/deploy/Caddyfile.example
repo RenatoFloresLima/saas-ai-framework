@@ -1,0 +1,6 @@
+# Copiar para deploy/Caddyfile — substituir [CONFIGURAR] pelo domínio de production_url
+
+[CONFIGURAR_DOMINIO] {
+	encode gzip
+	reverse_proxy localhost:[APP_PORT]
+}
