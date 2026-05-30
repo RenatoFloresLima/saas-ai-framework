@@ -38,6 +38,10 @@ Gere todos os arquivos de config:
 ### 4. Variáveis de Ambiente
 Gere `.env.example` com TODAS as variáveis necessárias para todo o projeto (auth, db, stripe, email, etc.), com comentários explicando cada uma.
 
+Auth (mínimo para SaaS default):
+- `AUTH_SECRET`, `AUTH_URL`, `NEXTAUTH_URL`
+- `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` (comentário: redirect `{AUTH_URL}/api/auth/callback/google`)
+
 ### 5. Docker Compose
 Gere `docker-compose.yml` para desenvolvimento local com:
 - PostgreSQL com dados persistentes

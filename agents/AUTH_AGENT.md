@@ -79,6 +79,27 @@ Contexto adicional:
 
 ---
 
+## Referência canônica (SaaS default)
+
+Antes de gerar ou revisar auth, leia **`references/auth/PATTERNS.md`** e use os arquivos em **`references/auth/`** como base.
+
+**Importante:** gere código apenas no **projeto SaaS do usuário** (pasta de destino da Fase 1), nunca dentro do repositório do framework `saas-ai-framework`.
+
+### UX obrigatória
+
+| Requisito | Implementação |
+|-----------|----------------|
+| Mostrar/ocultar senha | `PasswordInput` em login, registro e reset |
+| Google — escolher conta | `authorization.params.prompt: "select_account"` |
+| Google — botão condicional | `isGoogleOAuthEnabled()`; ocultar botão se env ausente |
+| Erros OAuth na login | `getOAuthErrorMessage()` + `?error=` do NextAuth |
+| Logout visível | `DashboardUserMenu` no header (sessão servidor) + "Sair" na sidebar |
+| Sessão no cliente | `AuthSessionProvider` com `session={await auth()}` no layout raiz |
+
+Não use **apenas** `UserButton` com `useSession()` no header do dashboard — com JWT a sessão no cliente frequentemente fica vazia e o botão "Sair" não aparece.
+
+---
+
 ## Checklist de Qualidade
 
 Antes de entregar qualquer código de auth, verificar:
@@ -125,10 +146,18 @@ src/
 │       ├── reset-password/page.tsx
 │       ├── verify-email/page.tsx
 │       └── two-factor/page.tsx
-└── components/
+├── components/
+│   ├── ui/
+│   │   └── password-input.tsx       ← toggle mostrar/ocultar senha
+│   ├── providers/
+│   │   └── session-provider.tsx     ← recebe session do servidor
+│   └── auth/
+│       ├── login-form.tsx
+│       ├── register-form.tsx
+│       ├── social-button.tsx
+│       ├── dashboard-user-menu.tsx  ← logout no header (preferir a user-button só-client)
+│       └── user-button.tsx          ← opcional; não substitui dashboard-user-menu
+└── lib/
     └── auth/
-        ├── login-form.tsx
-        ├── register-form.tsx
-        ├── social-button.tsx
-        └── user-button.tsx
+        └── oauth.ts                 ← isGoogleOAuthEnabled, getOAuthErrorMessage
 ```

@@ -8,6 +8,9 @@
 ## Identificação do Projeto
 
 ```
+# Pasta onde o orquestrador deve GERAR o código (fora do repo saas-ai-framework)
+Caminho do projeto gerado: [ex: ~/projetos/meu-saas ou abrir essa pasta como workspace no Cursor]
+
 Nome do projeto: [ex: Flowdesk, Gestora, ClienteHub]
 Nome técnico (slug): [ex: flowdesk, gestora, clientehub]
 Domínio principal: [ex: app.meudominio.com.br]

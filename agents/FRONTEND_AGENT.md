@@ -67,16 +67,25 @@ Sombras: shadow-sm para cards sutis
 
 ```
 ┌─────────────────────────────────────────┐
-│ HEADER: Logo | Nav | User Menu          │
+│ HEADER: Logo | Nav | User Menu + Sair   │
 ├──────────┬──────────────────────────────┤
 │          │                              │
 │ SIDEBAR  │  PAGE CONTENT               │
-│          │  (Breadcrumb + Content)      │
 │ Nav      │                              │
-│ Items    │                              │
-│          │                              │
+│ + Sair   │                              │
 └──────────┴──────────────────────────────┘
 ```
+
+### Header e logout (obrigatório no SaaS default)
+
+- Layout do dashboard: **Server Component** com `await auth()` / `getCurrentUser()`
+- Renderizar `DashboardUserMenu` (ver `references/auth/dashboard-user-menu.tsx`)
+- Sidebar: formulário com `logoutAction` e label **Sair** no rodapé
+- Não usar apenas `UserButton` + `useSession()` no header — sessão JWT no cliente pode ficar vazia
+
+### Formulários de senha
+
+- Usar `PasswordInput` (`references/auth/password-input.tsx`) em login, registro e reset
 
 ---
 

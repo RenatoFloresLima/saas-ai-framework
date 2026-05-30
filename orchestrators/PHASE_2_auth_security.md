@@ -30,11 +30,15 @@ Expanda o schema Prisma adicionando:
 
 ### PARTE 2 — NextAuth.js v5 Configuration
 
+**Leia antes:** `references/auth/PATTERNS.md` e copie/adapte os arquivos de `references/auth/` para o projeto do usuário.
+
 Gere:
 - `src/auth.ts` → configuração principal do NextAuth
-  - Providers: Credentials, Google, GitHub
+  - Providers: Credentials, Google (e GitHub se configurado em `project_config.md`)
+  - Google: `authorization.params.prompt: "select_account"`; registrar provider só se `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET` existirem
   - Callbacks: session, jwt, signIn
   - Adapter Prisma
+  - `pages.error: "/login"` em `auth.config.ts`
 - `src/auth.config.ts` → config sem adapter (para Edge)
 - `src/middleware.ts` → proteção de rotas (atualizado)
 - `src/lib/auth/session.ts` → helpers de sessão no server
@@ -76,14 +80,29 @@ VIEWER: somente leitura
 
 Gere em `src/app/(auth)/`:
 - `login/page.tsx` + `LoginForm` component
+  - `googleOAuthEnabled={isGoogleOAuthEnabled()}` na page (server)
+  - `PasswordInput` para senha; exibir erros OAuth (`getOAuthErrorMessage`)
 - `register/page.tsx` + `RegisterForm` component
+  - Mesmo padrão: `PasswordInput`, botão Google condicional
 - `forgot-password/page.tsx`
-- `reset-password/page.tsx`
+- `reset-password/page.tsx` → `PasswordInput` nos campos de senha
 - `verify-email/page.tsx`
 - `two-factor/page.tsx`
 - `layout.tsx` → layout compartilhado das páginas auth
 
+Gere também:
+- `src/components/ui/password-input.tsx` (ver `references/auth/password-input.tsx`)
+- `src/lib/auth/oauth.ts` (ver `references/auth/oauth.ts`)
+- `src/components/providers/session-provider.tsx` — layout raiz passa `session={await auth()}`
+
 Padrão visual: Card centralizado, logo, formulário com React Hook Form + Zod
+
+### PARTE 5b — Dashboard: logout e sessão
+
+No projeto gerado (layout do dashboard):
+- `src/app/(dashboard)/layout.tsx` (async): `DashboardUserMenu` com `getCurrentUser()` — ver `references/auth/dashboard-user-menu.tsx`
+- Sidebar: item **Sair** com `<form action={logoutAction}>`
+- Não depender só de `useSession()` no header para exibir logout
 
 ### PARTE 6 — Segurança
 
@@ -119,8 +138,11 @@ Gere com Resend + React Email:
 - [ ] `npx prisma migrate dev` roda sem erros
 - [ ] Registro de usuário funciona + email de verificação enviado
 - [ ] Login com credenciais funciona
-- [ ] Login com Google/GitHub funciona
+- [ ] Login com Google/GitHub funciona (seleção de conta Google; redirect URI correta)
+- [ ] Campos de senha têm toggle mostrar/ocultar (`PasswordInput`)
+- [ ] Botão "Sair" visível no header e na sidebar após login
 - [ ] Logout funciona e limpa sessão
+- [ ] Erros OAuth exibem mensagem clara na página de login
 - [ ] Reset de senha funciona end-to-end
 - [ ] Rotas protegidas redirecionam para login
 - [ ] RBAC bloqueia acesso indevido

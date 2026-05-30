@@ -17,6 +17,7 @@ A ideia: **gerar tudo que é padrão → você desenvolve só o diferencial do n
 | `subagents/` | Tarefas pontuais (CRUD, RBAC, …) |
 | `rules/` | Fonte das regras (TypeScript, segurança, API, banco) |
 | `templates/` | Config do projeto e contexto de negócio |
+| `references/` | Código de referência para o SaaS default (auth, etc.) — copiar no projeto gerado |
 
 ---
 
@@ -39,7 +40,7 @@ cd saas-ai-framework
 ./scripts/install-in-project.sh .
 ```
 
-O script copia `.cursor/`, `agents/`, `orchestrators/`, `templates/` e demais pastas necessárias para o projeto destino.
+O script copia `.cursor/`, `agents/`, `orchestrators/`, `templates/`, `references/` (SaaS default) e demais pastas para o **projeto SaaS de destino** (não instale no próprio repo do framework).
 
 ### Opção 2 — Git submodule
 
@@ -70,6 +71,8 @@ subagents/
 rules/
 skills/
 templates/
+references/
+docs/
 AGENTS.md
 ```
 

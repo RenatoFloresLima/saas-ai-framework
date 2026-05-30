@@ -14,14 +14,19 @@ Antes de iniciar, confirme que existem:
 
 Se não estiverem preenchidos, peça ao usuário para completá-los ou use a skill `project-setup`.
 
+## Escopo do repositório
+
+Este repositório é **somente o orquestrador** (prompts, rules, referências). O código do SaaS é gerado no **projeto destino do usuário** (pasta indicada em `project_config.md` ou workspace aberto no Cursor) — **nunca** commitar app gerado dentro de `saas-ai-framework`.
+
 ## Instruções
 
 1. Leia `orchestrators/MASTER_ORCHESTRATOR.md` e siga o fluxo completo.
 2. As regras em `.cursor/rules/` já estão ativas — nunca viole `global.mdc` ou `security.mdc`.
 3. Execute as fases **em ordem** (1 → 5). Nunca pule fases.
-4. Ao iniciar, confirme entendimento com 5 bullets e peça aprovação das decisões técnicas.
-5. Aguarde confirmação do usuário antes de cada fase subsequente.
-6. Ao final de cada fase, liste o que foi gerado e o que vem a seguir.
+4. Na Fase 2, siga `references/auth/PATTERNS.md` para o SaaS default (senha visível, OAuth, logout).
+5. Ao iniciar, confirme entendimento com 5 bullets e peça aprovação das decisões técnicas.
+6. Aguarde confirmação do usuário antes de cada fase subsequente.
+7. Ao final de cada fase, liste o que foi gerado e o que vem a seguir.
 
 ## Formato do fluxo de fases
 

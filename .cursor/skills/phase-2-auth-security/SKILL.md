@@ -8,15 +8,16 @@ description: Executa a Fase 2 (Auth & Security) — login, OAuth, RBAC, middlewa
 ## Instruções
 
 1. Leia `orchestrators/PHASE_2_auth_security.md` e execute todas as etapas.
-2. Coordene os agents:
+2. Leia e aplique `references/auth/PATTERNS.md` — copie/adapte arquivos de `references/auth/` no **projeto SaaS do usuário**, não neste repositório do framework.
+3. Coordene os agents:
    - `agents/AUTH_AGENT.md` — autenticação
    - `agents/SECURITY_AGENT.md` — RBAC e middlewares
    - `agents/DATABASE_AGENT.md` — schema de usuários e sessões
-3. A Fase 1 deve estar concluída (schema base existente).
+4. A Fase 1 deve estar concluída (schema base existente).
 
 ## Critério de conclusão
 
-Usuário consegue registrar, logar, logout. RBAC funcionando.
+Usuário consegue registrar, logar e **sair** (botão visível no header e sidebar). RBAC funcionando. Senha com toggle mostrar/ocultar. Google OAuth (se configurado) permite escolher conta.
 
 ## Próximo passo
 

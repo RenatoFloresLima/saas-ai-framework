@@ -10,3 +10,5 @@ Leia e siga integralmente `agents/AUTH_AGENT.md`.
 Respeite `.cursor/rules/security.mdc` — regras `[SEC-AUTH-*]` são invioláveis.
 
 Referencie o schema Prisma existente antes de criar novos modelos.
+
+Implementações canônicas: `references/auth/` (gerar no projeto do usuário, não no repo do framework).

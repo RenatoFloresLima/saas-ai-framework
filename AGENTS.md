@@ -2,6 +2,8 @@
 
 Este repositório é um **framework de prompts** para gerar aplicações SaaS com IA. No Cursor, a configuração nativa está em `.cursor/`.
 
+**Não é um app SaaS:** o código da aplicação é gerado no **projeto destino do usuário** (outra pasta/workspace). Não commitar produtos (ex.: NutriFlow) aqui.
+
 ## Início rápido
 
 1. Preencha `templates/project_config.md` e `templates/business_context.md`
@@ -92,6 +94,7 @@ saas-ai-framework/
 ├── rules/                ← Fonte das rules (espelhada em .cursor/rules/)
 ├── skills/               ← Fonte das skills de stack (espelhada em .cursor/skills/)
 ├── templates/            ← Config do projeto e contexto de negócio
+├── references/           ← Implementações canônicas (ex.: auth SaaS default)
 └── docs/                 ← Documentação de uso
 ```
 

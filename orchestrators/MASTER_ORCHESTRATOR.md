@@ -3,6 +3,12 @@
 ## Propósito
 Este é o arquivo de entrada do framework. Ele coordena todos os agents, define a ordem de execução e garante que cada fase seja completada antes de avançar.
 
+## Onde o código é gerado
+
+- **Este repositório** (`saas-ai-framework`): apenas prompts, rules, orchestrators e **referências** (`references/`).
+- **Projeto SaaS do usuário**: pasta de destino da Fase 1 (ex.: `~/projetos/meu-saas` ou workspace aberto no Cursor). Todo `src/`, `prisma/`, `.env` do app vão **lá**.
+- **Nunca** misturar app gerado com o repo do orquestrador (ex.: não criar NutriFlow ou outro produto dentro deste framework).
+
 ---
 
 ## 📥 Inputs Necessários
@@ -73,10 +79,11 @@ Comece agora com o passo 1.
 
 ### FASE 2 — Auth & Security
 **Orquestrador:** `PHASE_2_auth_security.md`
+**Referência UX:** `references/auth/PATTERNS.md`
 **Agents:** `AUTH_AGENT.md`, `SECURITY_AGENT.md`, `DATABASE_AGENT.md`
 **O que gera:**
 - Schema de usuários, sessões, tokens
-- Sistema de autenticação completo
+- Sistema de autenticação completo (SaaS default: `PasswordInput`, OAuth com seleção de conta, logout no header/sidebar)
 - Middleware de autorização (RBAC)
 - Páginas de auth (login, registro, recuperação de senha)
 - Guards e HOCs de proteção

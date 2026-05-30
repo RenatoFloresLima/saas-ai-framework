@@ -1,5 +1,24 @@
 # 📖 HOW TO USE — Guia de Uso do SaaS Framework
 
+## Framework vs projeto gerado
+
+| Repositório | Contém |
+|-------------|--------|
+| `saas-ai-framework` | Prompts, agents, `references/` (padrões), rules — **não** é o app |
+| Seu SaaS (outra pasta) | `src/`, `prisma/`, `.env` — tudo que o orquestrador gera |
+
+Ao rodar o orquestrador, abra o **workspace do projeto gerado** (ou indique o caminho em `project_config.md`). O SaaS default de auth está em `references/auth/` — a IA copia/adapta esses padrões na Fase 2.
+
+Instale o framework no projeto SaaS com:
+
+```bash
+./scripts/install-in-project.sh ~/projetos/meu-saas
+```
+
+O script copia `references/`, `.cursor/`, agents, orchestrators e templates. **Não** aponte o script para a pasta do próprio `saas-ai-framework`.
+
+---
+
 ## TL;DR — Versão Ultra Rápida
 
 ### Cursor (configuração já incluída)
