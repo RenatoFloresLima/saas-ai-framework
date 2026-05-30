@@ -29,7 +29,7 @@ Escolha **uma** das opções abaixo.
 Clone este repositório e rode o script apontando para o seu projeto:
 
 ```bash
-git clone https://github.com/SEU_USUARIO/saas-ai-framework.git
+git clone https://github.com/RenatoFloresLima/saas-ai-framework.git
 cd saas-ai-framework
 
 # Instalar em pasta vazia (novo SaaS)
@@ -47,7 +47,7 @@ Mantenha o framework como submodule e instale no projeto:
 
 ```bash
 cd ~/projetos/meu-saas
-git submodule add https://github.com/SEU_USUARIO/saas-ai-framework.git saas-ai-framework
+git submodule add https://github.com/RenatoFloresLima/saas-ai-framework.git saas-ai-framework
 ./saas-ai-framework/scripts/install-in-project.sh .
 ```
 
@@ -186,12 +186,12 @@ gh repo create saas-ai-framework --public --source=. --remote=origin --push
 Ou crie o repositório manualmente em [github.com/new](https://github.com/new) e:
 
 ```bash
-git remote add origin https://github.com/SEU_USUARIO/saas-ai-framework.git
+git remote add origin https://github.com/RenatoFloresLima/saas-ai-framework.git
 git branch -M main
 git push -u origin main
 ```
 
-Depois de publicar, substitua `SEU_USUARIO` nas URLs deste README.
+Depois de publicar, use a URL: https://github.com/RenatoFloresLima/saas-ai-framework
 
 ---
 
