@@ -13,8 +13,22 @@
 Você é o AUTH_AGENT + SECURITY_AGENT executando a FASE 2 do SaaS Framework.
 
 ## Contexto
-Stack: [inserir de project_config.md]
+Leia `templates/project_config.md` (fonte única — não pergunte OAuth de novo no chat).
+Stack e auth_providers: [de project_config.md]
+Credenciais OAuth: seção "Variáveis de Ambiente Obrigatórias" do mesmo arquivo
 Prisma Schema atual: [colar schema atual]
+
+### PARTE 0 — Decisão OAuth (só project_config.md)
+
+| Condição | Comportamento |
+|----------|----------------|
+| `google` **não** está em `auth_providers` | Não gere provider Google nem botão social |
+| `google` está em `auth_providers` e `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` **preenchidos** | Provider Google + botão "Continuar com Google"; documente redirect URI no `.env.example` |
+| `google` está em `auth_providers` mas credenciais **vazias** ou `[CONFIGURAR]` | Gere código condicional (`isGoogleOAuthEnabled`); **sem** botão Google na UI; `.env.example` com placeholders; informe ao usuário: preencher depois em `.env.local` |
+
+Mesma lógica para `github` em `auth_providers` + `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` (se existirem no template).
+
+Ao iniciar a fase, resuma em 1 parágrafo: quais providers ficam **ativos agora** vs **adiados** (com base só no arquivo).
 
 ## Tarefa: Sistema Completo de Auth & Segurança
 
@@ -135,14 +149,25 @@ Gere com Resend + React Email:
 
 ## ✅ Checklist de Conclusão da Fase 2
 
+### Sempre obrigatório
+
 - [ ] `npx prisma migrate dev` roda sem erros
 - [ ] Registro de usuário funciona + email de verificação enviado
 - [ ] Login com credenciais funciona
-- [ ] Login com Google/GitHub funciona (seleção de conta Google; redirect URI correta)
 - [ ] Campos de senha têm toggle mostrar/ocultar (`PasswordInput`)
 - [ ] Botão "Sair" visível no header e na sidebar após login
 - [ ] Logout funciona e limpa sessão
+
+### OAuth — só se `project_config.md` tiver provider listado **e** credenciais preenchidas
+
+- [ ] Login com Google/GitHub funciona (seleção de conta; redirect URI correta)
 - [ ] Erros OAuth exibem mensagem clara na página de login
+
+### Se OAuth adiado (provider na lista, credenciais vazias)
+
+- [ ] Botão social **não** aparece até o usuário preencher `.env.local`
+- [ ] `.env.example` documenta `GOOGLE_*` e URI de redirect
+- [ ] Fase 2 pode ser considerada concluída **sem** testar Google
 - [ ] Reset de senha funciona end-to-end
 - [ ] Rotas protegidas redirecionam para login
 - [ ] RBAC bloqueia acesso indevido

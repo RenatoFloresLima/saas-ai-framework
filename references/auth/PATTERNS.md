@@ -8,6 +8,8 @@ Integração com React Hook Form: `{...form.register("password")}`.
 
 ## 2. Google OAuth
 
+**Config:** `project_config.md` → `auth_providers` + `GOOGLE_CLIENT_*`. Credenciais vazias = sem botão Google; não perguntar de novo no chat da Fase 2.
+
 ### Provider (`src/auth.ts`)
 
 ```typescript

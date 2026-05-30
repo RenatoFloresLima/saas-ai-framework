@@ -42,11 +42,13 @@ db_host_prod: Neon                             # ou: Supabase, PlanetScale, Rail
 
 # Autenticação
 auth_library: NextAuth.js v5                   # ou: Clerk, Supabase Auth, Lucia
-auth_providers:                                # listar os que precisa
+auth_providers:                                # o orquestrador lê isto na Fase 2 — não repita no chat
   - credentials (email + senha)
-  - google
+  - google                                      # remova da lista se não for usar Google
   # - github
   # - magic-link
+# Regra Fase 2: provider em auth_providers + credenciais preenchidas abaixo → OAuth ativo.
+# Provider na lista mas GOOGLE_* vazio → só email/senha; botão Google oculto até preencher .env.local
 
 # Pagamentos
 payment_provider: Stripe                       # ou: Mercado Pago (Brasil), Hotmart
@@ -188,9 +190,10 @@ DATABASE_URL=                      # URL do PostgreSQL
 NEXTAUTH_SECRET=                   # openssl rand -base64 32
 NEXTAUTH_URL=                      # http://localhost:3000
 
-# OAuth
+# OAuth (preencha quando tiver; vazio = Fase 2 segue sem botão Google)
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
+# Redirect no Google Console: {NEXTAUTH_URL}/api/auth/callback/google
 
 # Stripe
 STRIPE_SECRET_KEY=

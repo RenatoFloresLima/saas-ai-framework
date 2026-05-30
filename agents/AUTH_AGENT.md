@@ -79,6 +79,15 @@ Contexto adicional:
 
 ---
 
+## Configuração: `project_config.md` (sem perguntas extras)
+
+Leia **`templates/project_config.md`** do projeto:
+
+- `auth_providers` → quais providers implementar
+- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` (e GitHub, se houver) → se vazios, OAuth fica adiado: código condicional, sem botão na UI
+
+Não pergunte credenciais OAuth no chat se o template já define a intenção e os campos.
+
 ## Referência canônica (SaaS default)
 
 Antes de gerar ou revisar auth, leia **`references/auth/PATTERNS.md`** e use os arquivos em **`references/auth/`** como base.
